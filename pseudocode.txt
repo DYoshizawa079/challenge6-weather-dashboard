@@ -1,0 +1,5 @@
+Receive text from searchbox
+Save the searchbox text
+Get lat long of city
+Get weather info from lat long
+Extract data from API 
