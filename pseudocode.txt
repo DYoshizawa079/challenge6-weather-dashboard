@@ -1,5 +1,60 @@
-Receive text from searchbox
-Save the searchbox text
+Run "Clear weather info" function
+- Show list of saved searches
+    - Get list from localStorage 
+    - If list from localStorage isnt empty
+        - Generate button from each saved search (saved as array item)
+
+"Clear weather info" function
+------------------------
+
+When user clicks a button (from a saved search)
+"Get button info" function
+------------------------
+- Run "Clear weather info" function
+- Pass city's name and lat long info into "Show weather" function
+
+When user clicks "search" button (from textbox search)
+"Get searchbox text" function
+------------------------
+- Run "Clear weather info" function
+- Save the searchbox text
+- Pass value to "Get Lat long" function
+
+"Get Lat long" function
+------------------------
 Get lat long of city
-Get weather info from lat long
-Extract data from API 
+Check whether a valid lat long is returned
+- If a valid lat long is NOT returned
+    - Indicate that they entered an invalid location
+Check whether the lat long matches one in an existing search
+- If the lat long DOES NOT match one in an existing search
+    - Add to list of saved searches
+        - Add new button (with city name, lat, long)
+        - Get list of buttons (put each button in array with lat long)
+        - Add list of buttons into localStorage
+Pass lat long, city info to "Show weather" function
+
+"Show weather" function
+------------------------
+Get weather info from lat long, city
+Show weather info
+- Show current weather
+    - show city name
+    - show date
+    - show weather (as icon)
+        - Select icon to show (based on ID number)
+    - show temperature
+    - show humidity
+    - show wind speed
+    - show UV index
+        - Indicate level based on index value
+- Show future weather
+    - Get info for array items 1-5
+    - For each item/day
+        - show date
+        - show weather
+            - Select icon to show (based on ID number)
+        - show temperature
+        - show wind speed
+        - show humidity
+
