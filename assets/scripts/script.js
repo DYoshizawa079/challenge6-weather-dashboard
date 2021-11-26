@@ -8,11 +8,12 @@ var apiKey = "0052c45ec6b9cc06b70de487e9bbc6bc";
 
 // Add past searches to localStorage and sidebar
 var addSearch = function(search) {
-    localStorage.getItem("searches");
-    console.log("searches", searches);
+    searches = localStorage.getItem("searches");
+    searches = JSON.parse(searches);
+    console.log("searches from localstorage", searches);
     searches.push(search);
     localStorage.setItem("searches", JSON.stringify(searches));
-    console.log("searches", searches);
+    console.log("searches updated", searches);
 }
 
 // Get the city's name from the searchbox

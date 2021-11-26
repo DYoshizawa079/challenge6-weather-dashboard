@@ -48,6 +48,7 @@ Show weather info
     - show wind speed
     - show UV index
         - Indicate level based on index value
+        (0-2 is good, 3-5 is moderate, 6+ is severe)
 - Show future weather
     - Get info for array items 1-5
     - For each item/day
