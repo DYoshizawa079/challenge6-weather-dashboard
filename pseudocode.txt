@@ -17,6 +17,7 @@ When user clicks "search" button (from textbox search)
 "Get searchbox text" function
 ------------------------
 - Run "Clear weather info" function
+- Trim whitespace
 - Save the searchbox text
 - Pass value to "Get Lat long" function
 

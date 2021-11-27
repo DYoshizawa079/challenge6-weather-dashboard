@@ -1,15 +1,43 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="assets/styles/style.css" />
 </head>
 <body>
-    <h1>Weather Dashboard</h1>
-    <form>
-        <input type="text" id="searchbox">
-        <button id="submit">Search</button>
-    </form>
-    <div id="searchlist">
-        
-    </div>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+
+    <!-- Main panel -->
+    <main>
+
+        <!-- Sidebar -->
+        <aside>
+            <form>
+                <input type="text" id="searchbox">
+                <button id="submit">Search</button>
+            </form>
+            <div id="searchlist">
+                
+            </div>
+        </aside>
+
+        <!-- Weather Display Panel -->
+        <section id="currentcity">
+            <div id="currentweather">
+                <ul>
+                </ul>
+            </div>
+            <div id="forecasted">
+
+            </div>
+        </section>
+
+    </main>
+    
     <script src="assets/scripts/script.js"></script>
 </body>

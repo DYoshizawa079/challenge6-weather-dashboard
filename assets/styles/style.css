@@ -1,0 +1,27 @@
+main {
+    width: 100%;
+}
+aside {
+    border:solid 1px #999;
+    width: 30%;
+    float:left;
+}
+section {
+    border:solid 1px #999;
+    width:60%;
+    float:right;
+}
+.uv_favorable {
+    color:green;
+}
+.uv_moderate {
+    color:orange;
+}
+.uv_severe {
+    color:red;
+}
+.day {
+    border:solid 1px black;
+    width:19%;
+    float:left;
+}
