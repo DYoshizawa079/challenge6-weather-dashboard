@@ -13,6 +13,7 @@ var cityName;
 // "Clear weather info" function
 var clearDisplay = function(){
     elemCurrentWeather.innerHTML = "";
+    elemForecastedWeather.innerHTML = "";
 }
 
 // "Get Saved Searches" function
@@ -39,6 +40,7 @@ var getBtnInfo = function(event) {
     clearDisplay();
     var cityBtn = event.target;
     console.log("city Button clicked",cityBtn);
+    cityName = cityBtn.textContent;
     var lat = cityBtn.getAttribute("data-lat");
     var long = cityBtn.getAttribute("data-long");
     getWeather(lat,long);
@@ -99,18 +101,33 @@ var getWeatherAPI = function(city) {
                 console.log("lat", data[0].lat);
                 console.log("long", data[0].lon);
 
+                console.log("searches",searches);
                 // Check whether search entry matches an existing search
-                /*if (match) {
-                    // make no new button
-                    // run getWeather()
-                } else {
-                    // make new button
-                }
-                */
-                            
 
+                if (searches) {
+                    var matched;
+                    for (var i=0; i < searches.length; i++) {
+                        var btnLat = searches[i].lat;
+                        var btnLon = searches[i].long;
+                        console.log(btnLat, btnLon);
+                        if (latitude === btnLat && longitude === btnLon) {
+                            console.log("match found");
+                            matched = true;
+                        } else {
+                            console.log("match NOT found");
+                        }
+                    }
+                    if (matched!=true) {
+                        addSearch(cityName, latitude, longitude);
+                        console.log("addSearch runs");
+                        matched = false;
+                    }
+                } else {
+                    addSearch(cityName, latitude, longitude);
+                }
+                
                 getWeather(latitude,longitude);
-                addSearch(cityName, latitude, longitude);
+                
             }
         });
 }

@@ -27,8 +27,10 @@ Get lat long of city
 Check whether a valid lat long is returned
 - If a valid lat long is NOT returned
     - Indicate that they entered an invalid location
-Check whether the lat long matches one in an existing search
-- If the lat long DOES NOT match one in an existing search
+Scan the lat long values of each button and see whether there is a match
+- If a lat-long match is NOT found
+    - Generate a button
+- If the lat-long match is NOT found
     - Add to list of saved searches
         - Add new button (with city name, lat, long)
         - Get list of buttons (put each button in array with lat long)
