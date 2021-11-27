@@ -167,6 +167,25 @@ var displayForecastedWeather = function(data) {
         dayLI.textContent = "Date: " + day.weekday + ", " + day.month + ", " + day.day;
         forecastDayUL.appendChild(dayLI);
 
+        var weatherLI = document.createElement("li");
+        var weather = document.createElement("img");
+        var weatherSrc = "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png";
+        weather.setAttribute("src", weatherSrc);
+        weatherLI.appendChild(weather);
+        forecastDayUL.appendChild(weatherLI);
+
+        var tempLI = document.createElement("li");
+        tempLI.textContent = "Temperature (Max): " + data.daily[i].temp.max + "C";
+        forecastDayUL.appendChild(tempLI);
+
+        var windLI = document.createElement("li");
+        windLI.textContent = "Wind speed: " + data.daily[i].wind_speed + "m/sec";
+        forecastDayUL.appendChild(windLI);
+
+        var humidityLI = document.createElement("li");
+        humidityLI.textContent = "Humidity: " + data.daily[i].humidity + "%";
+        forecastDayUL.appendChild(humidityLI);
+
         elemForecastedWeather.appendChild(forecastDay);
 
     }
