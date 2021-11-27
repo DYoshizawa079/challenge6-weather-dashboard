@@ -3,8 +3,8 @@ var elemSearchbox = document.querySelector("#searchbox");
 var elemSubmitBtn = document.querySelector("#submit");
 var elemSearchList = document.querySelector("#searchlist");
 var searches = [];
-var elemCurrentWeather = document.querySelector("#currentweather");
-var elemForecastedWeather = document.querySelector("#forecasted");
+var elemCurrentWeather = document.querySelector("#currentweather div");
+var elemForecastedWeather = document.querySelector("#forecasted div");
 
 var apiKey = "0052c45ec6b9cc06b70de487e9bbc6bc";
 
@@ -147,36 +147,36 @@ var convertTimestamp = function(timestamp){
 
 // Display the current weather data 
 var displayCurrentWeather = function(data) {
-    var city = document.createElement("li");
-    city.textContent = "City: " + cityName;
+    var city = document.createElement("h3");
+    city.textContent = cityName;
     elemCurrentWeather.appendChild(city);
 
-    var date = document.createElement("li");
+    var date = document.createElement("p");
     var currentDate = convertTimestamp(data.current.dt);
     console.log(currentDate);
-    date.textContent = "Date: " + currentDate.weekday + ", " + currentDate.month + ", " + currentDate.day + ", " + currentDate.year;
+    date.textContent = currentDate.weekday + ", " + currentDate.month + ", " + currentDate.day + ", " + currentDate.year;
     elemCurrentWeather.appendChild(date);
 
-    var weatherLI = document.createElement("li");
-    elemCurrentWeather.appendChild(weatherLI);
+    //var weatherLI = document.createElement("li");
+    //elemCurrentWeather.appendChild(weatherLI);
     var weather = document.createElement("img");
     var weatherSrc = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png";
     weather.setAttribute("src", weatherSrc);
-    weatherLI.appendChild(weather);
+    elemCurrentWeather.appendChild(weather);
 
-    var temp = document.createElement("li");
-    temp.textContent = "Temperature: " + data.current.temp + "C";
+    var temp = document.createElement("p");
+    temp.textContent = "Temp: " + data.current.temp + "C";
     elemCurrentWeather.appendChild(temp);
 
-    var humidity = document.createElement("li");
+    var humidity = document.createElement("p");
     humidity.textContent = "Humidity: " + data.current.humidity + "%";
     elemCurrentWeather.appendChild(humidity);
 
-    var wind = document.createElement("li");
-    wind.textContent = "Wind speed: " + data.current.wind_speed + "m/sec";
+    var wind = document.createElement("p");
+    wind.textContent = "Wind: " + data.current.wind_speed + "m/sec";
     elemCurrentWeather.appendChild(wind);
 
-    var uv = document.createElement("li");
+    var uv = document.createElement("p");
     uv.textContent = "UV Index: " + data.current.uvi;
     if (data.current.uvi <= 2) {
         uv.setAttribute("class", "uv_favorable");
@@ -196,33 +196,28 @@ var displayForecastedWeather = function(data) {
         var forecastDay = document.createElement("div");
         forecastDay.setAttribute("class","day");
 
-        var forecastDayUL = document.createElement("ul");
-        forecastDay.appendChild(forecastDayUL);
-
-        var dayLI = document.createElement("li");
+        var dayLI = document.createElement("h4");
         var day = data.daily[i].dt;
         day = convertTimestamp(day);
-        dayLI.textContent = "Date: " + day.weekday + ", " + day.month + ", " + day.day;
-        forecastDayUL.appendChild(dayLI);
+        dayLI.textContent = day.weekday + ", " + day.month + ", " + day.day;
+        forecastDay.appendChild(dayLI);
 
-        var weatherLI = document.createElement("li");
         var weather = document.createElement("img");
         var weatherSrc = "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png";
         weather.setAttribute("src", weatherSrc);
-        weatherLI.appendChild(weather);
-        forecastDayUL.appendChild(weatherLI);
+        forecastDay.appendChild(weather);
 
-        var tempLI = document.createElement("li");
-        tempLI.textContent = "Temperature (Max): " + data.daily[i].temp.max + "C";
-        forecastDayUL.appendChild(tempLI);
+        var tempLI = document.createElement("p");
+        tempLI.textContent = "Temp (Max): " + data.daily[i].temp.max + "C";
+        forecastDay.appendChild(tempLI);
 
-        var windLI = document.createElement("li");
-        windLI.textContent = "Wind speed: " + data.daily[i].wind_speed + "m/sec";
-        forecastDayUL.appendChild(windLI);
+        var windLI = document.createElement("p");
+        windLI.textContent = "Wind: " + data.daily[i].wind_speed + "m/sec";
+        forecastDay.appendChild(windLI);
 
-        var humidityLI = document.createElement("li");
+        var humidityLI = document.createElement("p");
         humidityLI.textContent = "Humidity: " + data.daily[i].humidity + "%";
-        forecastDayUL.appendChild(humidityLI);
+        forecastDay.appendChild(humidityLI);
 
         elemForecastedWeather.appendChild(forecastDay);
 

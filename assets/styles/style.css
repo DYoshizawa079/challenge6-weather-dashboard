@@ -1,15 +1,84 @@
+* {
+    margin:0;
+    padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+:root {
+    --primary-color:#0a50a1;
+    --secondary-color:#66bd63;
+    --tertiary-color:#cccccc;
+}
+body {
+    font-size:14px;
+}
+header {
+    max-width:1024px;
+    background-color: var(--primary-color);
+    padding: 10px;
+    margin: 20px auto;
+    box-sizing:border-box;
+    color:#ffffff
+}
 main {
-    width: 100%;
+    max-width:1024px;
+    margin: 0 auto;
+    display:flex;
+    column-gap:10px;
 }
 aside {
-    border:solid 1px #999;
-    width: 30%;
-    float:left;
+    width: 24%;
 }
+
+/* Form items */
+form {
+    padding-bottom:10px;
+    border-bottom: solid 1px var(--tertiary-color);
+    margin-bottom:15px;
+}
+form input {
+    width:100%;
+    box-sizing: border-box;
+    margin-bottom:5px;
+    padding:5px;
+    border:solid 1px var(--tertiary-color);
+}
+button {
+    width:100%;
+    margin-bottom:5px;
+    padding:5px;
+    background-color: var(--tertiary-color);
+    border:none;
+    text-transform: uppercase;
+}
+form button {
+    background-color: var(--secondary-color);
+}
+
+/* Weather Display Section */
 section {
-    border:solid 1px #999;
-    width:60%;
-    float:right;
+    width:75%;
+}
+#currentweather {
+    border-bottom:solid 1px  var(--tertiary-color);
+    padding-bottom:20px;
+    margin-bottom:20px;
+}
+#currentweather h2 {
+    border-bottom:solid 1px  var(--tertiary-color);
+    padding-bottom:10px;
+    margin-bottom:10px;
+}
+#currentweather h3 {
+    text-transform: uppercase;
+}
+#forecasted h2 {
+    border-bottom:solid 1px  var(--tertiary-color);
+    padding-bottom:10px;
+    margin-bottom:10px;
+}
+#forecasted > div {
+    display:flex;
+    column-gap:5px;
 }
 .uv_favorable {
     color:green;
@@ -21,7 +90,7 @@ section {
     color:red;
 }
 .day {
-    border:solid 1px black;
-    width:19%;
-    float:left;
+    background-color: var(--tertiary-color);
+    width:20%;
+    padding: 7px;
 }
