@@ -21,14 +21,17 @@ var getSavedSearches = function() {
     searches = JSON.parse(searches);
     console.log("searches from localstorage", searches);
 
-    for (var i=0; i < searches.length; i++) {
-        console.log(searches[i]);
-        var searchListBtn = document.createElement("button");
-        searchListBtn.textContent = searches[i];
-        searchListBtn.setAttribute("data-lat","");
-        searchListBtn.setAttribute("data-long","");
-        elemSearchList.appendChild(searchListBtn);
+    if (searches) {
+        for (var i=0; i < searches.length; i++) {
+            console.log(searches[i]);
+            var searchListBtn = document.createElement("button");
+            searchListBtn.textContent = searches[i].city;
+            searchListBtn.setAttribute("data-lat", searches[i].lat);
+            searchListBtn.setAttribute("data-long", searches[i].long);
+            elemSearchList.appendChild(searchListBtn);
+        }
     }
+    
 }
 
 // "Get button info" function
@@ -42,8 +45,24 @@ var getBtnInfo = function(event) {
 }
 
 // Add past searches to localStorage and sidebar
-var addSearch = function(search) {
-    searches.push(search);
+var addSearch = function(city,lat,long) {
+
+    var savedSearch = {
+        city: city,
+        lat: lat,
+        long: long
+    }
+    if (searches) {
+        searches.push(savedSearch);
+    } else {
+        searches = [savedSearch];
+    }
+    var searchListBtn = document.createElement("button");
+    searchListBtn.textContent = savedSearch.city;
+    searchListBtn.setAttribute("data-lat", savedSearch.lat);
+    searchListBtn.setAttribute("data-long", savedSearch.long);
+    elemSearchList.appendChild(searchListBtn);
+    
     localStorage.setItem("searches", JSON.stringify(searches));
     console.log("searches updated", searches);
 }
@@ -56,7 +75,6 @@ var getCity = function(event){
     cityName.trim();
     console.log("cityName", cityName);
     getWeatherAPI(cityName);
-    addSearch(cityName);
 }
 
 // Generate the weather API URL
@@ -89,7 +107,10 @@ var getWeatherAPI = function(city) {
                     // make new button
                 }
                 */
-                getWeather(latitude, longitude);
+                            
+
+                getWeather(latitude,longitude);
+                addSearch(cityName, latitude, longitude);
             }
         });
 }
