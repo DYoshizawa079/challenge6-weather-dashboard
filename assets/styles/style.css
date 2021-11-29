@@ -29,6 +29,9 @@ main {
 aside {
     width: 24%;
 }
+p {
+    padding-bottom: 3px;
+}
 
 /* Form items */
 form {
@@ -81,14 +84,23 @@ section {
     display:flex;
     column-gap:5px;
 }
-.uv_favorable {
-    color:green;
+.uv_favorable span {
+    background-color: green;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 5px;
 }
-.uv_moderate {
-    color:orange;
+.uv_moderate span {
+    background-color: orange;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 5px;
 }
-.uv_severe {
-    color:red;
+.uv_severe span {
+    background-color: red;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 5px;
 }
 .day {
     background-color: var(--tertiary-color);

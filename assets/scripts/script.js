@@ -30,7 +30,6 @@ var getSavedSearches = function() {
             elemSearchList.appendChild(searchListBtn);
         }
     }
-    
 }
 
 // "Get saved search" function
@@ -136,6 +135,7 @@ var convertTimestamp = function(timestamp){
 
 // Display the current weather data 
 var displayCurrentWeather = function(data) {
+
     var city = document.createElement("h3");
     city.textContent = cityName;
     elemCurrentWeather.appendChild(city);
@@ -163,7 +163,7 @@ var displayCurrentWeather = function(data) {
     elemCurrentWeather.appendChild(wind);
 
     var uv = document.createElement("p");
-    uv.textContent = "UV Index: " + data.current.uvi;
+    uv.innerHTML = "UV Index: <span>" + data.current.uvi + "</span>";
     if (data.current.uvi <= 2) {
         uv.setAttribute("class", "uv_favorable");
     } else if (data.current.uvi > 2 && data.current.uvi <=5) {
@@ -172,36 +172,39 @@ var displayCurrentWeather = function(data) {
         uv.setAttribute("class", "uv_severe");
     }
     elemCurrentWeather.appendChild(uv);
+
 }
 
-// Display the forecasted weather data
+// Display the 5-day weather forecast
 var displayForecastedWeather = function(data) {
+
     for (var i=1; i <= 5; i++) {
+
         var forecastDay = document.createElement("div");
         forecastDay.setAttribute("class","day");
 
-        var dayLI = document.createElement("h4");
+        var dayDisp = document.createElement("h4");
         var day = data.daily[i].dt;
         day = convertTimestamp(day);
-        dayLI.innerHTML = day.weekday + "<br>" + day.month + " " + day.day;
-        forecastDay.appendChild(dayLI);
+        dayDisp.innerHTML = day.weekday + "<br>" + day.month + " " + day.day;
+        forecastDay.appendChild(dayDisp);
 
-        var weather = document.createElement("img");
+        var weatherDisp = document.createElement("img");
         var weatherSrc = "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png";
-        weather.setAttribute("src", weatherSrc);
-        forecastDay.appendChild(weather);
+        weatherDisp.setAttribute("src", weatherSrc);
+        forecastDay.appendChild(weatherDisp);
 
-        var tempLI = document.createElement("p");
-        tempLI.textContent = "Temp (Max): " + data.daily[i].temp.max + "C";
-        forecastDay.appendChild(tempLI);
+        var tempDisp = document.createElement("p");
+        tempDisp.textContent = "Temp (Max): " + data.daily[i].temp.max + "C";
+        forecastDay.appendChild(tempDisp);
 
-        var windLI = document.createElement("p");
-        windLI.textContent = "Wind: " + data.daily[i].wind_speed + "m/sec";
-        forecastDay.appendChild(windLI);
+        var windDisp = document.createElement("p");
+        windDisp.textContent = "Wind: " + data.daily[i].wind_speed + "m/sec";
+        forecastDay.appendChild(windDisp);
 
-        var humidityLI = document.createElement("p");
-        humidityLI.textContent = "Humidity: " + data.daily[i].humidity + "%";
-        forecastDay.appendChild(humidityLI);
+        var humidityDisp = document.createElement("p");
+        humidityDisp.textContent = "Humidity: " + data.daily[i].humidity + "%";
+        forecastDay.appendChild(humidityDisp);
 
         elemForecastedWeather.appendChild(forecastDay);
 
