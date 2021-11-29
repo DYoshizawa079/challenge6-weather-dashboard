@@ -10,21 +10,19 @@ var apiKey = "0052c45ec6b9cc06b70de487e9bbc6bc";
 
 var cityName;
 
-// "Clear weather info" function
+// Clears/Resets weather info that's displayed
 var clearDisplay = function(){
     elemCurrentWeather.innerHTML = "";
     elemForecastedWeather.innerHTML = "";
 }
 
-// "Get Saved Searches" function
+// Creates list of saved searches by retreiving saved searches from localStorage
 var getSavedSearches = function() {
     searches = localStorage.getItem("searches");
     searches = JSON.parse(searches);
-    console.log("searches from localstorage", searches);
 
     if (searches) {
         for (var i=0; i < searches.length; i++) {
-            console.log(searches[i]);
             var searchListBtn = document.createElement("button");
             searchListBtn.textContent = searches[i].city;
             searchListBtn.setAttribute("data-lat", searches[i].lat);
@@ -35,11 +33,11 @@ var getSavedSearches = function() {
     
 }
 
-// "Get button info" function
+// "Get saved search" function
+// When the user clicks on a saved search, get the latitude, longitude info needed to perform a new weather lookup based on that saved search
 var getBtnInfo = function(event) {
     clearDisplay();
     var cityBtn = event.target;
-    console.log("city Button clicked",cityBtn);
     cityName = cityBtn.textContent;
     var lat = cityBtn.getAttribute("data-lat");
     var long = cityBtn.getAttribute("data-long");
@@ -66,16 +64,15 @@ var addSearch = function(city,lat,long) {
     elemSearchList.appendChild(searchListBtn);
     
     localStorage.setItem("searches", JSON.stringify(searches));
-    console.log("searches updated", searches);
 }
 
 // Runs when user clicks the "Search" button
+// Get the text in the searchbox and feed that into a search that uses an API
 var getCity = function(event){
     event.preventDefault();
     clearDisplay();
     cityName = elemSearchbox.value;
     cityName.trim();
-    console.log("cityName", cityName);
     getWeatherAPI(cityName);
 }
 
@@ -91,17 +88,13 @@ var getWeatherAPI = function(city) {
             return response.json();
         })
         .then(function(data){
-            console.log("lat-long object",data);
 
             if (data.length===0) {
                 alert("That's not a valid search");
             } else {
                 latitude = data[0].lat;
                 longitude = data[0].lon;
-                console.log("lat", data[0].lat);
-                console.log("long", data[0].lon);
 
-                console.log("searches",searches);
                 // Check whether search entry matches an existing search
 
                 if (searches) {
@@ -109,17 +102,13 @@ var getWeatherAPI = function(city) {
                     for (var i=0; i < searches.length; i++) {
                         var btnLat = searches[i].lat;
                         var btnLon = searches[i].long;
-                        console.log(btnLat, btnLon);
                         if (latitude === btnLat && longitude === btnLon) {
-                            console.log("match found");
                             matched = true;
                         } else {
-                            console.log("match NOT found");
                         }
                     }
                     if (matched!=true) {
                         addSearch(cityName, latitude, longitude);
-                        console.log("addSearch runs");
                         matched = false;
                     }
                 } else {
@@ -153,7 +142,6 @@ var displayCurrentWeather = function(data) {
 
     var date = document.createElement("p");
     var currentDate = convertTimestamp(data.current.dt);
-    console.log(currentDate);
     date.textContent = currentDate.weekday + ", " + currentDate.month + ", " + currentDate.day + ", " + currentDate.year;
     elemCurrentWeather.appendChild(date);
 
@@ -188,9 +176,7 @@ var displayCurrentWeather = function(data) {
 
 // Display the forecasted weather data
 var displayForecastedWeather = function(data) {
-    console.log("forecasted weather");
     for (var i=1; i <= 5; i++) {
-        console.log(data.daily[i]);
         var forecastDay = document.createElement("div");
         forecastDay.setAttribute("class","day");
 
@@ -231,8 +217,6 @@ var getWeather = function(lat,long) {
             return response.json();
         })
         .then(function(data){
-            console.log("weather object", data);
-
             displayCurrentWeather(data);
             displayForecastedWeather(data);
         });
