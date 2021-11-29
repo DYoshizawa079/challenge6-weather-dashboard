@@ -84,7 +84,7 @@ var getWeatherAPI = function(city) {
 
     var latitude;
     var longitude;
-    var geocodingAPI = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + apiKey;
+    var geocodingAPI = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + apiKey;
 
     fetch(geocodingAPI)
         .then(function(response) {
@@ -160,7 +160,7 @@ var displayCurrentWeather = function(data) {
     //var weatherLI = document.createElement("li");
     //elemCurrentWeather.appendChild(weatherLI);
     var weather = document.createElement("img");
-    var weatherSrc = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png";
+    var weatherSrc = "https://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png";
     weather.setAttribute("src", weatherSrc);
     elemCurrentWeather.appendChild(weather);
 
