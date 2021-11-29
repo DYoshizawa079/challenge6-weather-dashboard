@@ -157,8 +157,6 @@ var displayCurrentWeather = function(data) {
     date.textContent = currentDate.weekday + ", " + currentDate.month + ", " + currentDate.day + ", " + currentDate.year;
     elemCurrentWeather.appendChild(date);
 
-    //var weatherLI = document.createElement("li");
-    //elemCurrentWeather.appendChild(weatherLI);
     var weather = document.createElement("img");
     var weatherSrc = "https://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png";
     weather.setAttribute("src", weatherSrc);
@@ -199,7 +197,7 @@ var displayForecastedWeather = function(data) {
         var dayLI = document.createElement("h4");
         var day = data.daily[i].dt;
         day = convertTimestamp(day);
-        dayLI.textContent = day.weekday + ", " + day.month + ", " + day.day;
+        dayLI.innerHTML = day.weekday + "<br>" + day.month + " " + day.day;
         forecastDay.appendChild(dayLI);
 
         var weather = document.createElement("img");
